@@ -2,6 +2,8 @@ import discord
 from datetime import datetime
 
 from rich.console import Console
+from rich.panel import Panel
+from rich.prompt import Confirm
 
 import log
 
@@ -9,9 +11,30 @@ console = Console()
 log.clear_log()
 
 # token handler
-token_file = open("src/token.txt", "r")
-bot_token = token_file.readline()
-token_file.close()
+try:
+    token_file = open("src/token.txt", "r")
+    bot_token = token_file.readline()
+    token_file.close()
+except:
+    console.print(Panel("Could not Find src/token.txt", title="Error"))
+    #console.print("Want to create the token file? (make sure to have to token ready)")
+    
+    if Confirm.ask("Want to create the token file? (make sure to have to token ready)"):
+        try:
+            token_file_create_file_var = open("src/token.txt", "x")
+            token_file_create_file_var.close()
+        except:
+            console.print("Token file already exist? internal error, try again. if it continues to do so, check the \"src/token.txt\"")
+            exit(3)
+
+        token_var = str(input("enter a vaild discord-bot token >>"))
+        #token_file_write = open("src/token.txt", "w")
+        with open("src/token.txt", "w") as token_file_write:
+            token_file_write.writelines(token_var)
+
+    else:
+        console.print("exiting. the Bot wont work, without the token file, with a vaild token")
+    exit(2)
 
 
 
@@ -68,4 +91,9 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run(bot_token)
+try:
+    client.run(bot_token)
+except:
+    console.log(f"Could not log in with token [{bot_token}]")
+    log.file_log(f"Could not log in with token [{bot_token}]", "internal")
+    log.file_log(f"Could not log in with token [{bot_token}] and further changes", "internal")
