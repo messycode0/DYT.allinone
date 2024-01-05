@@ -70,9 +70,17 @@ class MyClient(discord.Client):
         # check each word
         inputed_message_split = message.content.split()
         for word in inputed_message_split:
-            if word == "mackie":
-                allinone_pushback_log("001")
-                await message.channel.send(f"Its Immaculata, not {word}")
+            # check for ALLINONE PUSHBACK 001
+            Pushback_001_file = open("src/data/ALLINONE-001.PBD", "r")
+            for line in Pushback_001_file.readlines():
+                # await message.channel.send(line)
+                if word == line:
+                    allinone_pushback_log("001")
+                    await message.channel.send(f"Its Immaculata, not {word}")
+                    await message.channel.send(f"get it right {message.author}")
+            # if word == "mackie":
+            #     allinone_pushback_log("001")
+            #     await message.channel.send(f"Its Immaculata, not {word}")
         
         # rest of commands here
         if message.content == ".end":

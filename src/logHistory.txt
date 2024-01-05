@@ -1,8 +1,5 @@
-[2024-01-01 15:01:08.354994] [message] Message from messycode: adw
-[2024-01-01 15:01:09.232692] [status] logged in
-[2024-01-01 15:01:10.092868] [message] Message from messycode: d
-[2024-01-01 15:01:13.474157] [message] Message from messycode: .end
-[2024-01-01 15:01:13.722038] [message] Message from DYT.allinone#5731: good-day messycode
-[2024-01-01 15:01:14.005945] [message] Message from DYT.allinone#5731: killed at 2024-01-01 15:01:13.745487
-[2024-01-01 15:01:14.095892] [status] logged out and endded connection
-[2024-01-01 15:01:16.305791] [message] Message from messycode: a
+[2024-01-01 15:10:48.406773] [status] logged in
+[2024-01-01 15:10:52.817954] [message] Message from messycode: ahem
+[2024-01-01 15:10:54.351751] [message] Message from messycode: mackie
+[2024-01-01 15:10:59.266443] [message] Message from messycode: mackie
+[2024-01-01 15:11:01.107349] [message] Message from messycode: ?
