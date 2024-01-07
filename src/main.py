@@ -10,6 +10,8 @@ import log
 console = Console()
 log.clear_log()
 
+# data file
+
 # token handler
 try:
     token_file = open("src/token.txt", "r")
@@ -37,6 +39,15 @@ except:
     exit(2)
 
 
+# Data Parser
+def data_parser():
+    console.log("Starting data parsing analyse")
+    with open("src/data/ALLINONE-001.PBD", "r") as Pushback_001_file:
+        global IMMACULATA_BANNED_NAMES_SPLIT
+        IMMACULATA_BANNED_NAMES_SPLIT = Pushback_001_file.read().split("::")
+        print(IMMACULATA_BANNED_NAMES_SPLIT)
+
+
 
 def status_return():
     status_file = open("src/status.txt", "r")
@@ -62,26 +73,50 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
         console.print(f'Message from {message.author}: [i]{message.content}[/i]', style="white")
-        log.file_log(f'Message from {message.author}: {message.content}', "message")
-
+        try:
+            log.file_log(f'Message from {message.author}: {message.content}', "message")
+        except UnicodeEncodeError:
+            log.file_log(f'Message from {message.author}: {message.content}', "message_EMO")
+            pass
+        
         if message.author == client.user:
             return
         
         # check each word
+        #!!! THIS IS SUCH SUCH SUCH BAD CODE MAN
+        # START.1
         inputed_message_split = message.content.split()
+        g = 0
+        h = 0
         for word in inputed_message_split:
             # check for ALLINONE PUSHBACK 001
-            Pushback_001_file = open("src/data/ALLINONE-001.PBD", "r")
-            for line in Pushback_001_file.readlines():
+            # Pushback_001_file = open("src/data/ALLINONE-001.PBD", "r")         
+            print(f"{g}: {word}")
+            for line in IMMACULATA_BANNED_NAMES_SPLIT:
                 # await message.channel.send(line)
                 if word == line:
                     allinone_pushback_log("001")
                     await message.channel.send(f"Its Immaculata, not {word}")
                     await message.channel.send(f"get it right {message.author}")
+                    await message.delete()
+
+                    h = g
+
+                    appended_return_sentence = ""
+                    for i in range(len(inputed_message_split)):
+                        if i != h:
+                            wordf = inputed_message_split[i]
+                        else:
+                            wordf = "Immaculata"
+                        appended_return_sentence = f"{appended_return_sentence} {wordf}"
+
+                    await message.channel.send(f"{message.author} said: {appended_return_sentence}")
+            g += 1
             # if word == "mackie":
             #     allinone_pushback_log("001")
             #     await message.channel.send(f"Its Immaculata, not {word}")
-        
+        # END.1
+
         # rest of commands here
         if message.content == ".end":
             await message.channel.send(f"good-day {message.author}")
@@ -95,10 +130,16 @@ class MyClient(discord.Client):
             await client.change_presence(activity=discord.Game(name=status_return()))
             log.file_log(f"changed status too {status_return()}")
 
+
 intents = discord.Intents.default()
 intents.message_content = True
-
 client = MyClient(intents=intents)
+
+try:
+    data_parser()
+except Exception as E:
+    print(E)
+
 try:
     client.run(bot_token)
 except:

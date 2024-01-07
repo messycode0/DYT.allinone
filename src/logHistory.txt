@@ -1,5 +1,6 @@
-[2024-01-01 15:10:48.406773] [status] logged in
-[2024-01-01 15:10:52.817954] [message] Message from messycode: ahem
-[2024-01-01 15:10:54.351751] [message] Message from messycode: mackie
-[2024-01-01 15:10:59.266443] [message] Message from messycode: mackie
-[2024-01-01 15:11:01.107349] [message] Message from messycode: ?
+[2024-01-06 17:55:32.552712] [status] logged in
+[2024-01-06 17:55:35.391381] [message] Message from messycode: gove
+[2024-01-06 17:55:37.773890] [message] Message from messycode: gove:skul
+[2024-01-06 17:55:41.803040] [message_EMO] b'Message from messycode: gove ?'
+[2024-01-06 17:56:00.449979] [message_EMO] b'Message from messycode: thasts so ?  like i cant belive that'
+[2024-01-06 17:56:25.157076] [message] Message from messycode: 

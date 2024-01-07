@@ -18,6 +18,16 @@ def file_log(message, type="status"):
             # print()
             return
 
+        if type == "message_EMO":
+            # .encode('ascii', 'ignore')
+            message_split = message.split(" ")
+            print(message_split)
+            # foo = ""
+            # for i in range(len(message_split)):
+            #     foo = f"{foo} {message_split[i].encode('ascii', 'replace')}"
+            completed_logged_line = f"[{datetime.now()}] [{type}] {message.encode('ascii', 'replace')}\n"
+            log_file.write(completed_logged_line)
+            return
         completed_logged_line = f"[{datetime.now()}] [{type}] {message}\n"
         log_file.write(completed_logged_line)
         return
